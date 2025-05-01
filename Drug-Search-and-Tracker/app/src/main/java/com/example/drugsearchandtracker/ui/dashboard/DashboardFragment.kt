@@ -72,7 +72,7 @@ class DashboardFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.addMedicationButton.setOnClickListener {
-            // TODO: Navigate to add medication screen
+            findNavController().navigate(R.id.action_dashboard_to_search)
         }
 
         binding.retryButton.setOnClickListener {

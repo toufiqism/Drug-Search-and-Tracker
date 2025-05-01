@@ -14,7 +14,7 @@ object Utils {
 
             if (keypadHeight > screenHeight * 0.15) {
                 // Keyboard is opened
-                scrollableView.setPadding(0, 0, 0, 20)
+                scrollableView.setPadding(0, 0, 0, 10)
             } else {
                 // Keyboard is closed
                 scrollableView.setPadding(0, 0, 0, 0)
