@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.drugsearchandtracker.presentation.auth.AuthViewModel
 import com.example.drugsearchandtracker.ui.common.AuthResultDialog
 import com.example.drugsearchandtracker.ui.common.Utils
@@ -85,7 +86,7 @@ class LoginFragment : Fragment() {
                             buttonText = getString(R.string.lbl_continue),
                             onDismiss = {
                                 viewModel.resetState()
-                                // TODO: Navigate to main screen
+                                findNavController().navigate(R.id.action_login_to_dashboard)
                             }
                         )
                     }

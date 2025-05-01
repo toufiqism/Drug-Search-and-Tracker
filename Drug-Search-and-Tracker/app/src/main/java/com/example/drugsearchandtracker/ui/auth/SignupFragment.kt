@@ -88,7 +88,7 @@ class SignupFragment : Fragment() {
                             buttonText = getString(R.string.lbl_continue),
                             onDismiss = {
                                 viewModel.resetState()
-                                findNavController().popBackStack()
+                                findNavController().navigate(R.id.action_signup_to_dashboard)
                             }
                         )
                     }
