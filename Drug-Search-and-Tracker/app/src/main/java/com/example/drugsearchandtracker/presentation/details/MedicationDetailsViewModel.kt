@@ -3,6 +3,7 @@ package com.example.drugsearchandtracker.presentation.details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.drugsearchandtracker.data.local.entity.MedicationEntity
+import com.example.drugsearchandtracker.domain.repository.AuthRepository
 import com.example.drugsearchandtracker.domain.repository.MedicationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MedicationDetailsViewModel @Inject constructor(
-    private val repository: MedicationRepository
+    private val repository: MedicationRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<DetailsUiState>(DetailsUiState.Initial)
@@ -22,7 +24,12 @@ class MedicationDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 _uiState.value = DetailsUiState.Loading
-                repository.insertMedication(medication)
+                val currentUser = authRepository.getCurrentUser()
+                if (currentUser == null) {
+                    _uiState.value = DetailsUiState.Error("User not logged in")
+                    return@launch
+                }
+                repository.insertMedication(medication.copy(userId = currentUser.uid))
                 _uiState.value = DetailsUiState.Success
             } catch (e: Exception) {
                 _uiState.value = DetailsUiState.Error(e.message ?: "Failed to add medication")

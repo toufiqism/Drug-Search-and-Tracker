@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.drugsearchandtracker.data.local.entity.MedicationEntity
 import com.example.drugsearchandtracker.domain.manager.AuthManager
+import com.example.drugsearchandtracker.domain.repository.AuthRepository
 import com.example.drugsearchandtracker.domain.repository.MedicationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
     private val repository: MedicationRepository,
-    private val authManager: AuthManager
+    private val authManager: AuthManager,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<DashboardUiState>(DashboardUiState.Loading)
@@ -30,7 +32,13 @@ class DashboardViewModel @Inject constructor(
 
     fun loadMedications() {
         viewModelScope.launch {
-            repository.getAllMedications()
+            val currentUser = authRepository.getCurrentUser()
+            if (currentUser == null) {
+                _uiState.value = DashboardUiState.Error("User not logged in")
+                return@launch
+            }
+            
+            repository.getMedicationsByUserId(currentUser.uid)
                 .catch { error ->
                     _uiState.value = DashboardUiState.Error(error.message ?: "Unknown error occurred")
                 }

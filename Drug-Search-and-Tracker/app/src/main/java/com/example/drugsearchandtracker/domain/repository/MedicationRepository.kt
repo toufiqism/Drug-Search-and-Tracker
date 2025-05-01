@@ -6,18 +6,18 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface MedicationRepository {
-    fun getAllMedications(): Flow<List<MedicationEntity>>
+    fun getMedicationsByUserId(userId: String): Flow<List<MedicationEntity>>
     suspend fun insertMedication(medication: MedicationEntity)
     suspend fun deleteMedication(medication: MedicationEntity)
     suspend fun updateMedication(medication: MedicationEntity)
-    suspend fun getMedicationById(id: Long): MedicationEntity?
+    suspend fun getMedicationById(id: Long, userId: String): MedicationEntity?
 }
 
 class MedicationRepositoryImpl @Inject constructor(
     private val medicationDao: MedicationDao
 ) : MedicationRepository {
-    override fun getAllMedications(): Flow<List<MedicationEntity>> {
-        return medicationDao.getAllMedications()
+    override fun getMedicationsByUserId(userId: String): Flow<List<MedicationEntity>> {
+        return medicationDao.getMedicationsByUserId(userId)
     }
 
     override suspend fun insertMedication(medication: MedicationEntity) {
@@ -32,7 +32,7 @@ class MedicationRepositoryImpl @Inject constructor(
         medicationDao.updateMedication(medication)
     }
 
-    override suspend fun getMedicationById(id: Long): MedicationEntity? {
-        return medicationDao.getMedicationById(id)
+    override suspend fun getMedicationById(id: Long, userId: String): MedicationEntity? {
+        return medicationDao.getMedicationById(id, userId)
     }
 } 
