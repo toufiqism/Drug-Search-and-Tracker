@@ -10,4 +10,5 @@
     <string name="lbl_ok">Ok</string>
     <string name="msg_medication_added_to_list_successfully">Medication added to list successfully!</string>
     <string name="lbl_success">Success</string>
+    <string name="lbl_error">Error</string>
 </resources>

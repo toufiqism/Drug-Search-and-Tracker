@@ -79,7 +79,14 @@ class MedicationDetailsFragment : Fragment() {
             is DetailsUiState.Error -> {
                 binding.addToListButton.isEnabled = true
                 binding.addToListButton.text = "Add Medication to List"
-                showErrorDialog(state.message)
+                AuthResultDialog(requireContext()).showError(
+                    title = getString(R.string.lbl_error),
+                    message = state.message
+                ) {
+
+                }
+
+
             }
 
             else -> {
@@ -89,15 +96,7 @@ class MedicationDetailsFragment : Fragment() {
         }
     }
 
-    private fun showErrorDialog(message: String) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Error")
-            .setMessage(message)
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
-    }
+
 
     private fun setupClickListeners() {
         binding.backButton.setOnClickListener {
