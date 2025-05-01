@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.drugsearchandtracker.presentation.auth.AuthViewModel
 import com.example.drugsearchandtracker.ui.common.AuthResultDialog
+import com.example.drugsearchandtracker.ui.common.Utils
 import com.tofiq.drugsearchandtracker.R
 import com.tofiq.drugsearchandtracker.databinding.FragmentSignupBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,9 +40,16 @@ class SignupFragment : Fragment() {
         return binding.root
     }
 
+
+    private fun setKeyboardHideForScroll(view: View) {
+        val rootLayout = view.findViewById<ConstraintLayout>(R.id.root_layout)
+        val scrollView = view.findViewById<ScrollView>(R.id.scrollView)
+        // Set the keyboard listener
+        Utils.setKeyboardListener(rootLayout, scrollView)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+        setKeyboardHideForScroll(view)
         setupClickListeners()
         observeAuthState()
     }
