@@ -114,7 +114,9 @@ class DashboardFragment : Fragment() {
                             authResultDialog.showError(
                                 title = "Logout Failed",
                                 message = state.message
-                            )
+                            ){
+
+                            }
                         }
                         LogoutState.Initial -> {
                             binding.logoutProgressBar.isVisible = false
