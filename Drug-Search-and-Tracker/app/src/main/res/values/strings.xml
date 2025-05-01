@@ -7,4 +7,5 @@
     <string name="lbl_login_failed">Login Failed</string>
     <string name="lbl_welcome_back">Welcome Back!</string>
     <string name="msg_you_have_successfully_logged_in">You have successfully logged in.</string>
+    <string name="lbl_ok">Ok</string>
 </resources>
