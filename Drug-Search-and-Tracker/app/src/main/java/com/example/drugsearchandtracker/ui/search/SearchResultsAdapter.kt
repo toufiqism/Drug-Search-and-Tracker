@@ -41,7 +41,7 @@ class SearchResultsAdapter(
         fun bind(medication: ConceptProperty) {
             binding.apply {
                 medicationNameText.text = medication.name
-                medicationSynonymText.text = medication.synonym
+                rxCuiIdText.text = medication.rxcui
             }
         }
     }

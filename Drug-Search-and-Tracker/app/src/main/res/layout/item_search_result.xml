@@ -16,6 +16,14 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/rxCuiIdText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="18sp"
+            tools:text="RxCuiID" />
+        <TextView
             android:id="@+id/medicationNameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,14 +32,6 @@
             android:textStyle="bold"
             tools:text="Medication Name" />
 
-        <TextView
-            android:id="@+id/medicationSynonymText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp"
-            tools:text="Medication Synonym" />
 
     </LinearLayout>
 
