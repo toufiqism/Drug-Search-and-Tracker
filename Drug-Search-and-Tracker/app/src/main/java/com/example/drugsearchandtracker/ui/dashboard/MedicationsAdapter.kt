@@ -34,8 +34,8 @@ class MedicationsAdapter(
 
         fun bind(medication: MedicationEntity) {
             binding.apply {
-                medicationName.text = medication.name
-                medicationDetails.text = "${medication.dosage}, ${medication.frequency}"
+                rxCuiIdText.text = medication.rxCui
+                medicationNameText.text = medication.synonym
 
                 menuButton.setOnClickListener { view ->
                     showPopupMenu(view, medication)
@@ -48,10 +48,10 @@ class MedicationsAdapter(
                 menuInflater.inflate(R.menu.menu_medication_item, menu)
                 setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
-                        R.id.action_edit -> {
-                            onEditClick(medication)
-                            true
-                        }
+//                        R.id.action_edit -> {
+//                            onEditClick(medication)
+//                            true
+//                        }
                         R.id.action_delete -> {
                             onDeleteClick(medication)
                             true

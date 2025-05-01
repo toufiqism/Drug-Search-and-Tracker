@@ -55,7 +55,16 @@ class SearchMedicationFragment : Fragment() {
 
     private fun setupRecyclerView() {
         searchAdapter = SearchResultsAdapter { medication ->
-            // TODO: Handle medication selection
+            val bundle = Bundle().apply {
+                putString("medicationName", medication.name)
+                putString("genericName", medication.synonym)
+                putString("rxcui", medication.rxcui)
+                putString("tty", medication.tty)
+            }
+            findNavController().navigate(
+                R.id.medicationDetailsFragment,
+                bundle
+            )
         }
 
         binding.searchResultsRecyclerView.apply {

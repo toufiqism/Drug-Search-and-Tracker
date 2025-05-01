@@ -119,6 +119,32 @@
     <fragment
         android:id="@+id/searchMedicationFragment"
         android:name="com.example.drugsearchandtracker.ui.search.SearchMedicationFragment"
-        android:label="Search Medication" />
+        android:label="Search MedicationFragment">
+        <action
+            android:id="@+id/action_search_to_details"
+            app:destination="@id/medicationDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicationDetailsFragment"
+        android:name="com.example.drugsearchandtracker.ui.details.MedicationDetailsFragment"
+        android:label="MedicationDetailsFragment">
+        <argument
+            android:name="medicationName"
+            app:argType="string" />
+        <argument
+            android:name="genericName"
+            app:argType="string" />
+        <argument
+            android:name="rxcui"
+            app:argType="string" />
+        <argument
+            android:name="tty"
+            app:argType="string" />
+    </fragment>
 
 </navigation> 

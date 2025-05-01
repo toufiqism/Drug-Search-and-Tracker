@@ -24,7 +24,7 @@
             app:tint="@color/blue" />
 
         <TextView
-            android:id="@+id/medicationName"
+            android:id="@+id/rxCuiIdText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -35,19 +35,19 @@
             app:layout_constraintEnd_toStartOf="@id/menuButton"
             app:layout_constraintStart_toEndOf="@id/medicationIcon"
             app:layout_constraintTop_toTopOf="@id/medicationIcon"
-            tools:text="Medicine Name" />
+            tools:text="Rx Cui" />
 
         <TextView
-            android:id="@+id/medicationDetails"
+            android:id="@+id/medicationNameText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/medicationName"
-            app:layout_constraintStart_toStartOf="@id/medicationName"
-            app:layout_constraintTop_toBottomOf="@id/medicationName"
-            tools:text="2 pills, twice daily" />
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/rxCuiIdText"
+            app:layout_constraintStart_toStartOf="@id/rxCuiIdText"
+            app:layout_constraintTop_toBottomOf="@id/rxCuiIdText"
+            tools:text="Medicine Name" />
 
         <ImageButton
             android:id="@+id/menuButton"

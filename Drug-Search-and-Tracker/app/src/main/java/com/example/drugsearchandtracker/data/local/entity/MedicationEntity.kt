@@ -7,10 +7,11 @@ import androidx.room.PrimaryKey
 data class MedicationEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
+
     val name: String,
-    val dosage: String,
-    val frequency: String,
-    val startDate: Long,
-    val notes: String? = null,
+    val rxCui: String,
+    val synonym: String,
+    val tty: String,
+
     val createdAt: Long = System.currentTimeMillis()
 ) 
