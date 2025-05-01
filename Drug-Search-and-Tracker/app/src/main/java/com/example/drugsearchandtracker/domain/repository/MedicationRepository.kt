@@ -20,8 +20,10 @@ interface MedicationRepository {
 
     /**
      * Inserts a new medication into the database.
+     * Throws DuplicateMedicationException if the medication already exists for the user.
      *
      * @param medication The medication entity to insert
+     * @throws DuplicateMedicationException if medication already exists for the user
      */
     suspend fun insertMedication(medication: MedicationEntity)
 
@@ -47,7 +49,21 @@ interface MedicationRepository {
      * @return The medication entity if found, null otherwise
      */
     suspend fun getMedicationById(id: Long, userId: String): MedicationEntity?
+
+    /**
+     * Checks if a medication already exists for the given user.
+     *
+     * @param rxCui The RxNorm Concept Unique Identifier
+     * @param userId The ID of the user
+     * @return true if the medication exists, false otherwise
+     */
+    suspend fun medicationExists(rxCui: String, userId: String): Boolean
 }
+
+/**
+ * Exception thrown when attempting to add a duplicate medication.
+ */
+class DuplicateMedicationException : Exception("This medication is already in your list")
 
 /**
  * Implementation of MedicationRepository interface.
@@ -69,6 +85,9 @@ class MedicationRepositoryImpl @Inject constructor(
      * @see MedicationRepository.insertMedication
      */
     override suspend fun insertMedication(medication: MedicationEntity) {
+        if (medicationExists(medication.rxCui, medication.userId!!)) {
+            throw DuplicateMedicationException()
+        }
         medicationDao.insertMedication(medication)
     }
 
@@ -91,5 +110,12 @@ class MedicationRepositoryImpl @Inject constructor(
      */
     override suspend fun getMedicationById(id: Long, userId: String): MedicationEntity? {
         return medicationDao.getMedicationById(id, userId)
+    }
+
+    /**
+     * @see MedicationRepository.medicationExists
+     */
+    override suspend fun medicationExists(rxCui: String, userId: String): Boolean {
+        return medicationDao.medicationExists(rxCui, userId)
     }
 } 

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.drugsearchandtracker.data.local.entity.MedicationEntity
 import com.example.drugsearchandtracker.domain.repository.AuthRepository
+import com.example.drugsearchandtracker.domain.repository.DuplicateMedicationException
 import com.example.drugsearchandtracker.domain.repository.MedicationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,6 +32,7 @@ class MedicationDetailsViewModel @Inject constructor(
     /**
      * Adds a medication to the user's list.
      * Verifies user authentication and associates the medication with the current user.
+     * Handles duplicate medication cases.
      *
      * @param medication The medication entity to be added
      */
@@ -45,6 +47,8 @@ class MedicationDetailsViewModel @Inject constructor(
                 }
                 repository.insertMedication(medication.copy(userId = currentUser.uid))
                 _uiState.value = DetailsUiState.Success
+            } catch (e: DuplicateMedicationException) {
+                _uiState.value = DetailsUiState.Error("This medication is already in your list")
             } catch (e: Exception) {
                 _uiState.value = DetailsUiState.Error(e.message ?: "Failed to add medication")
             }

@@ -20,4 +20,14 @@ interface MedicationDao {
 
     @Query("SELECT * FROM medications WHERE id = :id AND userId = :userId")
     suspend fun getMedicationById(id: Long, userId: String): MedicationEntity?
+
+    /**
+     * Checks if a medication with the same rxCui already exists for the given user.
+     *
+     * @param rxCui The RxNorm Concept Unique Identifier
+     * @param userId The ID of the user
+     * @return true if the medication already exists, false otherwise
+     */
+    @Query("SELECT EXISTS(SELECT 1 FROM medications WHERE rxCui = :rxCui AND userId = :userId)")
+    suspend fun medicationExists(rxCui: String, userId: String): Boolean
 } 
