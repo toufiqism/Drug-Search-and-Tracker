@@ -13,7 +13,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.drugsearchandtracker.data.local.entity.MedicationEntity
 import com.example.drugsearchandtracker.presentation.details.DetailsUiState
 import com.example.drugsearchandtracker.presentation.details.MedicationDetailsViewModel
+import com.example.drugsearchandtracker.ui.common.AuthResultDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.tofiq.drugsearchandtracker.R
 import com.tofiq.drugsearchandtracker.databinding.FragmentMedicationDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -63,14 +65,23 @@ class MedicationDetailsFragment : Fragment() {
                 binding.addToListButton.isEnabled = false
                 binding.addToListButton.text = "Adding..."
             }
+
             is DetailsUiState.Success -> {
-                findNavController().popBackStack()
+                AuthResultDialog(requireContext()).showSuccess(
+                    title = getString(R.string.lbl_success),
+                    message = getString(R.string.msg_medication_added_to_list_successfully),
+                    buttonText = getString(R.string.lbl_ok)
+                ) {
+                    findNavController().popBackStack()
+                }
             }
+
             is DetailsUiState.Error -> {
                 binding.addToListButton.isEnabled = true
                 binding.addToListButton.text = "Add Medication to List"
                 showErrorDialog(state.message)
             }
+
             else -> {
                 binding.addToListButton.isEnabled = true
                 binding.addToListButton.text = "Add Medication to List"

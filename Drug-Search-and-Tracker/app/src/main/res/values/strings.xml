@@ -8,4 +8,6 @@
     <string name="lbl_welcome_back">Welcome Back!</string>
     <string name="msg_you_have_successfully_logged_in">You have successfully logged in.</string>
     <string name="lbl_ok">Ok</string>
+    <string name="msg_medication_added_to_list_successfully">Medication added to list successfully!</string>
+    <string name="lbl_success">Success</string>
 </resources>
