@@ -11,81 +11,82 @@ import com.tofiq.drugsearchandtracker.R
 import com.tofiq.drugsearchandtracker.databinding.DialogAuthResultBinding
 
 class AuthResultDialog(private val context: Context) {
+    private var dialog: Dialog? = null
 
     fun showSuccess(
         title: String,
         message: String,
-        buttonText: String = "OK",
-        onDismiss: () -> Unit = {}
+        buttonText: String,
+        onDismiss: () -> Unit
     ) {
-        showDialog(
-            title = title,
-            message = message,
-            buttonText = buttonText,
-            isSuccess = true,
-            onDismiss = onDismiss
-        )
+        showDialog(true, title, message, buttonText, onDismiss)
     }
 
     fun showError(
         title: String,
         message: String,
-        buttonText: String = "Try Again",
-        onDismiss: () -> Unit = {}
+        onDismiss: () -> Unit
     ) {
-        showDialog(
-            title = title,
-            message = message,
-            buttonText = buttonText,
-            isSuccess = false,
-            onDismiss = onDismiss
-        )
+        showDialog(false, title, message, context.getString(R.string.lbl_ok), onDismiss)
     }
 
     private fun showDialog(
+        isSuccess: Boolean,
         title: String,
         message: String,
         buttonText: String,
-        isSuccess: Boolean,
         onDismiss: () -> Unit
     ) {
-        val dialog = Dialog(context)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        
-        val binding = DialogAuthResultBinding.inflate(LayoutInflater.from(context))
-        dialog.setContentView(binding.root)
-        
-        // Set dialog properties
-        dialog.window?.apply {
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            setLayout(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT
-            )
-        }
-        dialog.setCancelable(false)
-        
-        // Set content
-        binding.apply {
-            statusIcon.setImageResource(
-                if (isSuccess) R.drawable.ic_success else R.drawable.ic_error
-            )
-            titleText.text = title
-            messageText.text = message
-            actionButton.apply {
-                text = buttonText
-                setBackgroundColor(
-                    context.getColor(
-                        if (isSuccess) R.color.blue else R.color.red
-                    )
+        // Dismiss any existing dialog
+        dialog?.dismiss()
+
+        dialog = Dialog(context).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+            val binding = DialogAuthResultBinding.inflate(LayoutInflater.from(context))
+            setContentView(binding.root)
+
+            // Set dialog properties
+            window?.apply {
+                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                setLayout(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT
                 )
-                setOnClickListener {
-                    dialog.dismiss()
-                    onDismiss()
+            }
+            setCancelable(false)
+
+            // Set content
+            binding.apply {
+                statusIcon.setImageResource(
+                    if (isSuccess) R.drawable.ic_success else R.drawable.ic_error
+                )
+                titleText.text = title
+                messageText.text = message
+                actionButton.apply {
+                    text = buttonText
+                    setBackgroundColor(
+                        context.getColor(
+                            if (isSuccess) R.color.blue else R.color.red
+                        )
+                    )
+                    setOnClickListener {
+                        dismiss()
+                        onDismiss()
+                    }
                 }
             }
+
+            setOnDismissListener {
+                dialog = null
+            }
         }
-        
-        dialog.show()
+
+        dialog?.show()
     }
-} 
+
+    fun dismiss() {
+        dialog?.dismiss()
+        dialog = null
+    }
+}
