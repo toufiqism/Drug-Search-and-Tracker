@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Drug Search and Tracker</string>
+    <string name="lbl_welcome">Welcome!</string>
+    <string name="msg_your_account_has_been_created_successfully">Your account has been created successfully.</string>
+    <string name="lbl_continue">Continue</string>
+    <string name="lbl_registration_failed">Registration Failed</string>
+    <string name="lbl_login_failed">Login Failed</string>
+    <string name="lbl_welcome_back">Welcome Back!</string>
+    <string name="msg_you_have_successfully_logged_in">You have successfully logged in.</string>
 </resources>

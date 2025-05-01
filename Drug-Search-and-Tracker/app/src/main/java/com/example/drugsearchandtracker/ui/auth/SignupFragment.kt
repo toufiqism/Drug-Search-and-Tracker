@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.drugsearchandtracker.presentation.auth.AuthViewModel
 import com.example.drugsearchandtracker.ui.common.AuthResultDialog
+import com.tofiq.drugsearchandtracker.R
 import com.tofiq.drugsearchandtracker.databinding.FragmentSignupBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -63,7 +64,7 @@ class SignupFragment : Fragment() {
                     // Handle error
                     state.error?.let { error ->
                         authResultDialog.showError(
-                            title = "Registration Failed",
+                            title = getString(R.string.lbl_registration_failed),
                             message = error,
                             onDismiss = { viewModel.resetState() }
                         )
@@ -72,9 +73,9 @@ class SignupFragment : Fragment() {
                     // Handle success
                     if (state.isSuccess) {
                         authResultDialog.showSuccess(
-                            title = "Welcome!",
-                            message = "Your account has been created successfully.",
-                            buttonText = "Continue",
+                            title = getString(R.string.lbl_welcome),
+                            message = getString(R.string.msg_your_account_has_been_created_successfully),
+                            buttonText = getString(R.string.lbl_continue),
                             onDismiss = {
                                 viewModel.resetState()
                                 findNavController().popBackStack()
