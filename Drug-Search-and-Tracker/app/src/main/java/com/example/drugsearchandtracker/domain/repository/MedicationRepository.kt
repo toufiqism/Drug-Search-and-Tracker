@@ -65,6 +65,8 @@ interface MedicationRepository {
  */
 class DuplicateMedicationException : Exception("This medication is already in your list")
 
+class MedicationLimitExceededException : Exception("You can only add up to 3 medications to your list")
+
 /**
  * Implementation of MedicationRepository interface.
  * Handles all medication-related data operations using Room database.

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.drugsearchandtracker.data.local.entity.MedicationEntity
 import com.example.drugsearchandtracker.domain.repository.AuthRepository
 import com.example.drugsearchandtracker.domain.repository.DuplicateMedicationException
+import com.example.drugsearchandtracker.domain.repository.MedicationLimitExceededException
 import com.example.drugsearchandtracker.domain.repository.MedicationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -49,6 +50,8 @@ class MedicationDetailsViewModel @Inject constructor(
                 _uiState.value = DetailsUiState.Success
             } catch (e: DuplicateMedicationException) {
                 _uiState.value = DetailsUiState.Error("This medication is already in your list")
+            } catch (e: MedicationLimitExceededException) {
+                _uiState.value = DetailsUiState.Error(e.message ?: "Medication limit exceeded")
             } catch (e: Exception) {
                 _uiState.value = DetailsUiState.Error(e.message ?: "Failed to add medication")
             }

@@ -21,6 +21,9 @@ interface MedicationDao {
     @Query("SELECT * FROM medications WHERE id = :id AND userId = :userId")
     suspend fun getMedicationById(id: Long, userId: String): MedicationEntity?
 
+    @Query("SELECT COUNT(*) FROM medications WHERE userId = :userId")
+    suspend fun getMedicationCount(userId: String): Int
+
     /**
      * Checks if a medication with the same rxCui already exists for the given user.
      *
