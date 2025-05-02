@@ -1,115 +1,91 @@
 # Drug Search and Tracker
 
-A modern Android application for searching and tracking medications, built with Kotlin and following MVVM architecture.
+A modern Android application that allows users to search for drugs, view detailed information, and track their medication usage. The app integrates with the National Library of Medicine's RxNorm APIs for drug data.
 
 ## Features
 
 ### Authentication
-- Secure user authentication using Firebase Authentication
-- Email and password-based signup and login
-- User session management
-- Secure logout functionality
+- Email and password authentication using Firebase Authentication
+- Secure login and signup flow
+- Session management
 
-### Medication Search
-- Real-time medication search using RxNav API
-- Search results display with medication details:
-  - Medication name
-  - Generic name
-  - RxCUI (RxNorm Concept Unique Identifier)
-  - Term Type (TTY)
-- Filtered results for specific medication types (SBD)
+### Drug Search
+- Real-time search using RxNorm API
+- Displays drug name and RxCUI ID
+- Shows top 10 results for each search
+- Clean and intuitive search interface
 
 ### Medication Management
 - Add medications to personal list
-- View list of tracked medications
+- View detailed medication information
 - Delete medications from the list
-- Medications are user-specific and private
-- Automatic timestamp tracking for added medications
+- Limit of 3 medications per user
+- Local storage using SQLite
 
 ### User Interface
-- Modern Material Design UI
-- Responsive layouts
+- Modern Material Design implementation
+- Responsive and adaptive layouts
+- Smooth navigation between screens
 - Loading states and error handling
 - Empty state handling
-- Smooth navigation with animations
-- Keyboard-aware scrolling
 
-### Data Management
-- Local storage using Room database
-- User-specific data isolation
-- Automatic data synchronization
-- Offline capability for tracked medications
-
-## Technical Stack
+## Technical Implementation
 
 ### Architecture
 - MVVM (Model-View-ViewModel) architecture
 - Clean Architecture principles
-- Repository pattern
-- Dependency Injection with Hilt
+- Dependency Injection using Hilt
+- Repository pattern for data management
 
-### Libraries
-- AndroidX
-- Room for local database
+### Technologies Used
+- Kotlin
+- Android Jetpack Components
+  - ViewModel
+  - Flow
+  - Navigation Component
+  - Room Database
 - Firebase Authentication
-- Kotlin Coroutines and Flow
+- RxNorm API Integration
+- SQLite for local storage
 - Material Design Components
-- Navigation Component
-- ViewBinding
 
-### Data Layer
-- Local: Room Database
-- Remote: RxNav API
-- Authentication: Firebase Auth
 
-## Security Features
-- User authentication required for all operations
-- Data isolation between users
-- Secure credential management
-- Protected API calls
+## Requirements Covered
+
+- [x] Authentication using Firebase
+- [x] Drug search using RxNorm API
+- [x] Medication list management
+- [x] Local storage using SQLite
+- [x] User interface implementation
+- [x] Error handling
+- [x] State management
+- [x] Navigation between screens
+
+## Technical Specifications
+
+- Java Version: 17
+- Android SDK Target: API 35 (Android 15)
+- Minimum SDK: API 29 (Android 10.0)
+- Build Tools: Android Gradle Plugin 8.9.2
+- Kotlin Version: 2.1.0
+
+## Future Improvements
+
+If given more time, I would implemented the following:
+
+• Accessibility and screen reader support
+• Animations
+• Reminder: Add a Calendar Event for Medication
+
 
 ## Getting Started
 
-### Prerequisites
-- Android Studio (latest version)
-- Kotlin 1.8+
-- Android SDK 21+
-- Firebase project setup
-
-### Installation
 1. Clone the repository
 2. Open the project in Android Studio
-3. Add your Firebase configuration file
-4. Build and run the app
+3. Set up Firebase project and add google-services.json
+4. Build and run the application
 
-## Project Structure
-```
-app/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com.example.drugsearchandtracker/
-│   │   │       ├── data/
-│   │   │       │   ├── local/      # Room database and entities
-│   │   │       │   └── remote/     # API calls and models
-│   │   │       ├── domain/         # Business logic and use cases
-│   │   │       ├── presentation/   # ViewModels and UI states
-│   │   │       └── ui/             # Activities, Fragments, and UI components
-│   │   └── res/                    # Resources and layouts
-```
-
-## Contributing
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
-- RxNav API for medication data
-- Firebase for authentication
-- Android Jetpack components
-- Material Design guidelines 
+This project is licensed under the MIT License - see the LICENSE file for details. 

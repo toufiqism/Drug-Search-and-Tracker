@@ -22,6 +22,8 @@
             android:layout_marginTop="4dp"
             android:textColor="@android:color/holo_green_dark"
             android:textSize="18sp"
+            android:importantForAccessibility="yes"
+            android:contentDescription="RxCUI ID: %s"
             tools:text="RxCuiID" />
         <TextView
             android:id="@+id/medicationNameText"
@@ -30,6 +32,8 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:importantForAccessibility="yes"
+            android:contentDescription="Medication name: %s"
             tools:text="Medication Name" />
 
 
