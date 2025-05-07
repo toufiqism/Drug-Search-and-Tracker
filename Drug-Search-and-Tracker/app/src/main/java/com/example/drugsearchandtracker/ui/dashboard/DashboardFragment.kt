@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -47,6 +48,28 @@ class DashboardFragment : Fragment() {
         setupAuthResultDialog()
         observeUiState()
         observeLogoutState()
+        animateViews()
+    }
+
+    private fun animateViews() {
+        // Animate title
+        binding.titleText.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
+        )
+
+        // Animate add medication button with delay
+        binding.addMedicationButton.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                startOffset = 100
+            }
+        )
+
+        // Animate logout button with delay
+        binding.logoutButton.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                startOffset = 200
+            }
+        )
     }
 
     private fun setupAuthResultDialog() {
@@ -114,7 +137,7 @@ class DashboardFragment : Fragment() {
                             authResultDialog.showError(
                                 title = "Logout Failed",
                                 message = state.message
-                            ){
+                            ) {
 
                             }
                         }
@@ -138,9 +161,23 @@ class DashboardFragment : Fragment() {
             when (state) {
                 is DashboardUiState.Success -> {
                     medicationsAdapter.submitList(state.medications)
+                    // Animate each item in the RecyclerView
+                    medicationsRecyclerView.startAnimation(
+                        AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
+                    )
                 }
                 is DashboardUiState.Error -> {
                     errorMessageText.text = state.message
+                    // Animate error state
+                    errorStateContainer.startAnimation(
+                        AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
+                    )
+                }
+                is DashboardUiState.Empty -> {
+                    // Animate empty state
+                    emptyStateContainer.startAnimation(
+                        AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
+                    )
                 }
                 else -> Unit
             }

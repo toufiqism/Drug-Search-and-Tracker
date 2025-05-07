@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ScrollView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
@@ -51,6 +52,35 @@ class LoginFragment : Fragment() {
         setKeyboardHideForScroll(view)
         setupClickListeners()
         observeAuthState()
+        animateViews()
+    }
+
+    private fun animateViews() {
+        // Animate title
+        binding.titleText.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right)
+        )
+
+        // Animate email input with delay
+        binding.emailInputLayout.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                startOffset = 100
+            }
+        )
+
+        // Animate password input with delay
+        binding.passwordInputLayout.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                startOffset = 200
+            }
+        )
+
+        // Animate login button with delay
+        binding.loginButton.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                startOffset = 300
+            }
+        )
     }
 
     private fun setupClickListeners() {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -47,6 +48,49 @@ class MedicationDetailsFragment : Fragment() {
         observe()
         setupClickListeners()
         displayMedicationDetails()
+        animateViews()
+    }
+
+    private fun animateViews() {
+        // Animate medication icon
+        binding.medicationIcon.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
+        )
+
+        // Animate medication name with delay
+        binding.medicationName.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                startOffset = 100
+            }
+        )
+
+        // Animate generic name with delay
+        binding.genericName.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                startOffset = 200
+            }
+        )
+
+        // Animate RxCUI with delay
+        binding.rxcuiText.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                startOffset = 300
+            }
+        )
+
+        // Animate TTY with delay
+        binding.ttyText.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_right).apply {
+                startOffset = 400
+            }
+        )
+
+        // Animate add to list button with delay
+        binding.addToListButton.startAnimation(
+            AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up).apply {
+                startOffset = 500
+            }
+        )
     }
 
     private fun observe() {
@@ -85,8 +129,6 @@ class MedicationDetailsFragment : Fragment() {
                 ) {
 
                 }
-
-
             }
 
             else -> {
@@ -95,8 +137,6 @@ class MedicationDetailsFragment : Fragment() {
             }
         }
     }
-
-
 
     private fun setupClickListeners() {
         binding.backButton.setOnClickListener {

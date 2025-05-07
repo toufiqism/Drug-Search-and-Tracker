@@ -12,12 +12,16 @@
         <action
             android:id="@+id/action_splash_to_auth"
             app:destination="@id/authFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
             
         <action
             android:id="@+id/action_splash_to_dashboard"
             app:destination="@id/dashboardFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -46,8 +50,8 @@
         <action
             android:id="@+id/action_auth_to_dashboard"
             app:destination="@id/dashboardFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
             app:popUpTo="@id/authFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -68,8 +72,8 @@
         <action
             android:id="@+id/action_login_to_dashboard"
             app:destination="@id/dashboardFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
             app:popUpTo="@id/authFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -90,8 +94,8 @@
         <action
             android:id="@+id/action_signup_to_dashboard"
             app:destination="@id/dashboardFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
             app:popUpTo="@id/authFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -104,6 +108,8 @@
         <action
             android:id="@+id/action_dashboard_to_auth"
             app:destination="@id/authFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
             app:popUpTo="@id/dashboardFragment"
             app:popUpToInclusive="true" />
 
@@ -123,10 +129,10 @@
         <action
             android:id="@+id/action_search_to_details"
             app:destination="@id/medicationDetailsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
     </fragment>
 
     <fragment
