@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "12385948713",
+    "project_id": "drug-search-and-tracker",
+    "storage_bucket": "drug-search-and-tracker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12385948713:android:91d5394e1c0dd3c30bb838",
+        "android_client_info": {
+          "package_name": "com.tofiq.drugsearchandtracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAz5406xFKeioLtjm_ap70A6gbG2n4EL4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
